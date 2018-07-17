@@ -1,5 +1,7 @@
 # Docker for Nginx / PHP-FPM
 
+[![View on Docker Hub](https://img.shields.io/badge/Docker%20Hub-View-green.svg?style=for-the-badge)](http://hub.docker.com/r/learninghouse/nginx-phpfpm)
+
 ## Versions
 
 ### PHP 7.1 (`php71.dockerfile`)
