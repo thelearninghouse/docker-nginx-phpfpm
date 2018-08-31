@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# install_blackfire.sh
+# ------------------
+# This script is for installing Blackfire.io profiling support in the container.
+
 version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") &&
 curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/alpine/amd64/$version &&
 tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp &&

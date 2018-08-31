@@ -39,7 +39,13 @@ RUN touch /var/run/php-fpm.pid && \
     chown -R www:www /var/run/php-fpm.pid
 COPY configs/php.ini /etc/php7/php.ini
 COPY configs/php-fpm.conf /etc/php7/php-fpm.conf
-COPY configs/laravel.php.conf /etc/php7/php-fpm.d/www.conf
+COPY configs/php.www.conf /etc/php7/php-fpm.d/www.conf
+
+# Configure file uploads
+RUN chown -R nginx:www /var/tmp/nginx && \
+    chmod 770 /var/tmp/nginx && \
+    mkdir -p /var/tmp/nginx/client_body && \
+    chmod -R 770 /var/tmp/nginx/client_body
 
 # Install Composer
 COPY scripts/install_composer.sh /root
@@ -51,9 +57,15 @@ RUN chmod 755 /root/install_composer.sh && \
 EXPOSE 80
 
 # Setup container runtime
+COPY scripts/entrypoint.sh /sbin/entrypoint.sh
+COPY scripts/export_secrets.sh /sbin/export_secrets
+COPY scripts/optimize_laravel.sh /sbin/optimize_laravel
 COPY configs/supervisord.conf /etc/supervisord.conf
 COPY scripts/supervisord-watchdog /sbin/supervisord-watchdog
-RUN chmod 755 /sbin/supervisord-watchdog && \
+RUN chmod 755 /sbin/entrypoint.sh && \
+    chmod 755 /sbin/export_secrets && \
+    chmod 755 /sbin/optimize_laravel && \
+    chmod 755 /sbin/supervisord-watchdog && \
     touch /var/run/supervisord.pid && \
     mkdir -p /var/log/supervisord
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+CMD ["/sbin/entrypoint.sh"]

@@ -1,4 +1,12 @@
 #!/usr/bin/python
+
+# supervisor-watchdog
+# ------------------
+# This script is loaded with Supervisor to monitor all processes managed by Supervisor. If any
+# process fails then the script will terminate all processes including Supervisor which will in
+# turn kill that container. This intentional failure will allow the Docker daemon to be properly
+# notified of an error and restart the container based on orchestration rules.
+
 import sys
 import os
 import logging
