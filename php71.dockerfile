@@ -19,7 +19,8 @@ RUN apk --no-cache add \
     php7-phar \
     php7-session \
     php7-tokenizer \
-    php7-zip
+    php7-zip \
+    git
 
 # Setup application user/group/cwd
 RUN adduser -D -g 'www' www && \
