@@ -47,6 +47,10 @@ COPY configs/php-fpm.conf ${PHP_CONFIG_DIR}/php-fpm.conf
 RUN sed -i "s|{{php_version}}|${PHP_VERSION}|g" ${PHP_CONFIG_DIR}/php-fpm.conf
 COPY configs/php.www.conf ${PHP_CONFIG_DIR}/php-fpm.d/www.conf
 
+# Configure PHP-FPM logging
+RUN mkfifo -m 666 /var/log/php${PHP_VERSION}/stdout && \
+    mkfifo -m 666 /var/log/php${PHP_VERSION}/stderr
+
 # Configure file uploads
 RUN chown -R nginx:www /var/tmp/nginx && \
     chmod 770 /var/tmp/nginx && \
