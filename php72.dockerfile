@@ -24,6 +24,7 @@ RUN apk --no-cache add \
     php7-session \
     php7-tokenizer \
     php7-zip \
+    php7-simplexml \
     git
 
 # Setup application user/group/cwd
