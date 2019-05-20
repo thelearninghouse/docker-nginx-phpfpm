@@ -71,7 +71,6 @@ EXPOSE 80
 
 # Setup container entrypoint
 COPY scripts/entrypoint.sh /sbin/entrypoint.sh
-COPY scripts/export_secrets.sh /sbin/export_secrets
 COPY scripts/optimize_laravel.sh /sbin/optimize_laravel
 COPY configs/supervisord.conf /etc/supervisord.conf
 RUN sed -i "s|{{php_version}}|${PHP_VERSION}|g" /etc/supervisord.conf

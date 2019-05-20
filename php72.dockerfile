@@ -77,7 +77,6 @@ COPY configs/supervisord.conf /etc/supervisord.conf
 RUN sed -i "s|{{php_version}}|${PHP_VERSION}|g" /etc/supervisord.conf
 COPY scripts/supervisord-watchdog /sbin/supervisord-watchdog
 RUN chmod 755 /sbin/entrypoint.sh && \
-    chmod 755 /sbin/export_secrets && \
     chmod 755 /sbin/optimize_laravel && \
     chmod 755 /sbin/supervisord-watchdog && \
     touch /var/run/supervisord.pid && \
