@@ -11,7 +11,6 @@ cd /app
 # for running in a non-development mode.
 if [ -f "artisan" ] && [ "$APP_ENV" != "local" ]; then
     optimize_laravel
-    rm .env
 fi
 
 # Start the application enviroment
