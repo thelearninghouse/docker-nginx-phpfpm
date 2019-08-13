@@ -72,8 +72,10 @@ EXPOSE 80
 # Setup container runtime
 COPY scripts/entrypoint.sh /sbin/entrypoint.sh
 COPY scripts/optimize_laravel.sh /sbin/optimize_laravel
-COPY configs/supervisord.conf /etc/supervisord.conf
-RUN sed -i "s|{{php_version}}|${PHP_VERSION}|g" /etc/supervisord.conf
+COPY configs/supervisord.conf /etc/supervisor/supervisord.conf
+RUN rm /etc/supervisord.conf
+RUN mkdir /etc/supervisor/conf.d
+RUN sed -i "s|{{php_version}}|${PHP_VERSION}|g" /etc/supervisor/supervisord.conf
 COPY scripts/supervisord-watchdog /sbin/supervisord-watchdog
 RUN chmod 755 /sbin/entrypoint.sh && \
     chmod 755 /sbin/export_secrets && \

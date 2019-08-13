@@ -13,5 +13,5 @@ if [ -f "artisan" ] && [ "$APP_ENV" != "local" ]; then
     optimize_laravel
 fi
 
-# Start the application enviroment
-/usr/bin/supervisord -c /etc/supervisord.conf
+# Start the application environment
+/usr/bin/supervisord -c /etc/supervisor/supervisord.conf
