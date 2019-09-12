@@ -31,15 +31,6 @@
 - Nginx 1.12
 - Supervisor 3.3
 
-### PHP 5.6 (`php56.dockerfile`)
-
-[![MicroBadger Size](https://img.shields.io/microbadger/image-size/learninghouse/nginx-phpfpm/5.6.svg?style=for-the-badge)](https://hub.docker.com/r/learninghouse/nginx-phpfpm/) [![MicroBadger Size](https://img.shields.io/microbadger/layers/learninghouse/nginx-phpfpm/5.6.svg?style=for-the-badge)](https://hub.docker.com/r/learninghouse/nginx-phpfpm/)
-
-- Alpine Linux 3.7
-- PHP 5.6
-- Nginx 1.12
-- Supervisor 3.3
-
 ## Build
 
 To build the images locally you can use the included `Makefile` for convenience.
@@ -53,7 +44,6 @@ make all
 ## Build specific PHP version
 
 ```bash
-make php56   # PHP 5.6
 make php71   # PHP 7.1
 make php72   # PHP 7.2
 make php73   # PHP 7.3
