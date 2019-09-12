@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# install_blackfire.sh
+# install_composer.sh
 # ------------------
 # This script is for installing the latest version of Composer in the container.
 

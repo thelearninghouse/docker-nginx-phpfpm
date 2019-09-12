@@ -4,13 +4,22 @@
 
 ## Versions
 
-### PHP 5.6 (`php56.dockerfile`)
+### PHP 7.3 (`php73.dockerfile`)
 
-[![MicroBadger Size](https://img.shields.io/microbadger/image-size/learninghouse/nginx-phpfpm/5.6.svg?style=for-the-badge)](https://hub.docker.com/r/learninghouse/nginx-phpfpm/) [![MicroBadger Size](https://img.shields.io/microbadger/layers/learninghouse/nginx-phpfpm/5.6.svg?style=for-the-badge)](https://hub.docker.com/r/learninghouse/nginx-phpfpm/)
+[![MicroBadger Size](https://img.shields.io/microbadger/image-size/learninghouse/nginx-phpfpm/7.3.svg?style=for-the-badge)](https://hub.docker.com/r/learninghouse/nginx-phpfpm/) [![MicroBadger Size](https://img.shields.io/microbadger/layers/learninghouse/nginx-phpfpm/7.3.svg?style=for-the-badge)](https://hub.docker.com/r/learninghouse/nginx-phpfpm/)
 
-- Alpine Linux 3.7
-- PHP 5.6
-- Nginx 1.12
+- Alpine Linux 3.10
+- PHP 7.3
+- Nginx 1.16
+- Supervisor 3.3
+
+### PHP 7.2 (`php72.dockerfile`)
+
+[![MicroBadger Size](https://img.shields.io/microbadger/image-size/learninghouse/nginx-phpfpm/7.2.svg?style=for-the-badge)](https://hub.docker.com/r/learninghouse/nginx-phpfpm/) [![MicroBadger Size](https://img.shields.io/microbadger/layers/learninghouse/nginx-phpfpm/7.2.svg?style=for-the-badge)](https://hub.docker.com/r/learninghouse/nginx-phpfpm/)
+
+- Alpine Linux 3.8
+- PHP 7.2
+- Nginx 1.14
 - Supervisor 3.3
 
 ### PHP 7.1 (`php71.dockerfile`)
@@ -22,13 +31,13 @@
 - Nginx 1.12
 - Supervisor 3.3
 
-### PHP 7.2 (`php72.dockerfile`)
+### PHP 5.6 (`php56.dockerfile`)
 
-[![MicroBadger Size](https://img.shields.io/microbadger/image-size/learninghouse/nginx-phpfpm/7.2.svg?style=for-the-badge)](https://hub.docker.com/r/learninghouse/nginx-phpfpm/) [![MicroBadger Size](https://img.shields.io/microbadger/layers/learninghouse/nginx-phpfpm/7.2.svg?style=for-the-badge)](https://hub.docker.com/r/learninghouse/nginx-phpfpm/)
+[![MicroBadger Size](https://img.shields.io/microbadger/image-size/learninghouse/nginx-phpfpm/5.6.svg?style=for-the-badge)](https://hub.docker.com/r/learninghouse/nginx-phpfpm/) [![MicroBadger Size](https://img.shields.io/microbadger/layers/learninghouse/nginx-phpfpm/5.6.svg?style=for-the-badge)](https://hub.docker.com/r/learninghouse/nginx-phpfpm/)
 
-- Alpine Linux 3.8
-- PHP 7.2
-- Nginx 1.14
+- Alpine Linux 3.7
+- PHP 5.6
+- Nginx 1.12
 - Supervisor 3.3
 
 ## Build
@@ -47,4 +56,5 @@ make all
 make php56   # PHP 5.6
 make php71   # PHP 7.1
 make php72   # PHP 7.2
+make php73   # PHP 7.3
 ```
