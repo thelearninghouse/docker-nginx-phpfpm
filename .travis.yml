@@ -7,3 +7,6 @@ jobs:
     - stage: Build, Run and Test PHP 7.3
       script:
         - docker build -t nginx-phpfpm:7.3 -f php73.dockerfile .
+    - stage: Build, Run and Test PHP 7.2
+      script:
+        - docker build -t nginx-phpfpm:7.2 -f php73.dockerfile .
