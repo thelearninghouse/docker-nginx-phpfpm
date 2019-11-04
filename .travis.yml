@@ -4,9 +4,13 @@ services:
 
 jobs:
   include:
-    - stage: Build, Run and Test PHP 7.3
+    - stage: PHP 7.3
       script:
         - docker build -t nginx-phpfpm:7.3 -f php73.dockerfile .
-    - stage: Build, Run and Test PHP 7.2
+        - docker run -d --name nginx-phpfpm-73 -p 8000:80 -v "$(pwd)/www:/app/public" nginx-phpfpm:7.3
+        - docker stop nginx-phpfpm-73
+    - stage: PHP 7.2
       script:
-        - docker build -t nginx-phpfpm:7.2 -f php73.dockerfile .
+        - docker build -t nginx-phpfpm:7.2 -f php72.dockerfile .
+        - docker run -d --name nginx-phpfpm-72 -p 8000:80 -v "$(pwd)/www:/app/public" nginx-phpfpm:7.2
+        - docker stop nginx-phpfpm-72
