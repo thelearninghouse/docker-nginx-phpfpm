@@ -1,0 +1,9 @@
+sudo: required
+services:
+  - docker
+
+jobs:
+  include:
+    - stage: Build, Run and Test PHP 7.3
+      script:
+        - docker build -t nginx-phpfpm:7.3 -f php73.dockerfile .
