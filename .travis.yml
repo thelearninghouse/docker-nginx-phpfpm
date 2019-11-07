@@ -8,9 +8,9 @@ jobs:
       script:
         - docker build -t nginx-phpfpm:7.3 -f php73.dockerfile .
         - sh tests/install_tools.sh
-        - ./container-structure-test test --image learninghouse/nginx-phpfpm:7.3-local --config tests/php_tests.yaml
-        - docker run -d --name nginx-phpfpm-73 -p 8000:80 -v "$(pwd)/www:/app/public" nginx-phpfpm:7.3
-        - docker stop nginx-phpfpm-73
+        - ./container-structure-test test --image nginx-phpfpm:7.3 --config tests/nginx_tests.yaml
+        - ./container-structure-test test --image nginx-phpfpm:7.3 --config tests/php_tests.yaml
+        - ./container-structure-test test --image nginx-phpfpm:7.3 --config tests/supervisord_tests.yaml
     - stage: PHP 7.2
       script:
         - docker build -t nginx-phpfpm:7.2 -f php72.dockerfile .

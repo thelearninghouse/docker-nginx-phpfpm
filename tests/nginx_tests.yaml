@@ -7,3 +7,7 @@ commandTests:
     command: "which"
     args: ["nginx"]
     expectedOutput: ["/usr/sbin/nginx\n"]
+
+metadataTest:
+  exposedPorts: ["80"]
+  workdir: "/app"
