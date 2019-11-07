@@ -1,0 +1,9 @@
+schemaVersion: "2.0.0"
+
+commandTests:
+
+# check that the nginx binary is in the correct location
+  - name: "nginx installation"
+    command: "which"
+    args: ["nginx"]
+    expectedOutput: ["/usr/sbin/nginx\n"]

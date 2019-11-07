@@ -1,0 +1,9 @@
+schemaVersion: "2.0.0"
+
+commandTests:
+
+# check that the supervisord binary is in the correct location
+  - name: "supervisord installation"
+    command: "which"
+    args: ["supervisord"]
+    expectedOutput: ["/usr/bin/supervisord\n"]
