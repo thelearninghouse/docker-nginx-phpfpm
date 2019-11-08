@@ -22,12 +22,36 @@ commandTests:
 
 fileExistenceTests:
 
+# check that php.ini config exists
+  - name: "php.ini config exists"
+    path: "/etc/php7/php.ini"
+    shouldExist: true
+
 # check that php-fpm config exists
   - name: "php-fpm config exists"
     path: "/etc/php7/php-fpm.conf"
+    shouldExist: true
+
+# check that php-fpm config exists
+  - name: "php-fpm config exists"
+    path: "/etc/php7/php-fpm.d/www.conf"
     shouldExist: true
 
 # check that application directory exists
   - name: "application directory exists"
     path: "/app"
     shouldExist: true
+
+fileContentTests:
+
+# check that php.ini settings are correct
+  - name: "php.ini config settings"
+    path: "/etc/php7/php.ini"
+    expectedContents:
+      - 'date.timezone = "UTC"'
+      - 'error_log = /dev/stderr'
+      - 'log_errors = On'
+      - 'session.auto_start = Off'
+      - 'short_open_tag = Off'
+      - 'upload_max_filesize = 50M'
+      - 'post_max_size = 100M'

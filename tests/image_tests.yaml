@@ -2,10 +2,11 @@ schemaVersion: "2.0.0"
 
 metadataTest:
   cmd: ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
-  exposedPorts: ["80"]
+  entrypoint: []
   env:
     - key: PHP_VERSION
       value: 7
     - key: PHP_CONFIG_DIR
       value: /etc/php7
+  exposedPorts: ["80"]
   workdir: "/app"

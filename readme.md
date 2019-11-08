@@ -6,16 +6,12 @@
 
 ### PHP 7.3 (`php73.dockerfile`)
 
-[![MicroBadger Size](https://img.shields.io/microbadger/image-size/learninghouse/nginx-phpfpm/7.3.svg?style=for-the-badge)](https://hub.docker.com/r/learninghouse/nginx-phpfpm/) [![MicroBadger Size](https://img.shields.io/microbadger/layers/learninghouse/nginx-phpfpm/7.3.svg?style=for-the-badge)](https://hub.docker.com/r/learninghouse/nginx-phpfpm/)
-
 - Alpine Linux 3.10
 - PHP 7.3
 - Nginx 1.16
 - Supervisor 3.3
 
 ### PHP 7.2 (`php72.dockerfile`)
-
-[![MicroBadger Size](https://img.shields.io/microbadger/image-size/learninghouse/nginx-phpfpm/7.2.svg?style=for-the-badge)](https://hub.docker.com/r/learninghouse/nginx-phpfpm/) [![MicroBadger Size](https://img.shields.io/microbadger/layers/learninghouse/nginx-phpfpm/7.2.svg?style=for-the-badge)](https://hub.docker.com/r/learninghouse/nginx-phpfpm/)
 
 - Alpine Linux 3.8
 - PHP 7.2
@@ -24,19 +20,8 @@
 
 ### PHP 7.1 (`php71.dockerfile`)
 
-[![MicroBadger Size](https://img.shields.io/microbadger/image-size/learninghouse/nginx-phpfpm/7.1.svg?style=for-the-badge)](https://hub.docker.com/r/learninghouse/nginx-phpfpm/) [![MicroBadger Size](https://img.shields.io/microbadger/layers/learninghouse/nginx-phpfpm/7.1.svg?style=for-the-badge)](https://hub.docker.com/r/learninghouse/nginx-phpfpm/)
-
 - Alpine Linux 3.7
 - PHP 7.1
-- Nginx 1.12
-- Supervisor 3.3
-
-### PHP 5.6 (`php56.dockerfile`)
-
-[![MicroBadger Size](https://img.shields.io/microbadger/image-size/learninghouse/nginx-phpfpm/5.6.svg?style=for-the-badge)](https://hub.docker.com/r/learninghouse/nginx-phpfpm/) [![MicroBadger Size](https://img.shields.io/microbadger/layers/learninghouse/nginx-phpfpm/5.6.svg?style=for-the-badge)](https://hub.docker.com/r/learninghouse/nginx-phpfpm/)
-
-- Alpine Linux 3.7
-- PHP 5.6
 - Nginx 1.12
 - Supervisor 3.3
 
@@ -53,8 +38,29 @@ make all
 ## Build specific PHP version
 
 ```bash
-make php56   # PHP 5.6
-make php71   # PHP 7.1
-make php72   # PHP 7.2
 make php73   # PHP 7.3
+make php72   # PHP 7.2
+make php71   # PHP 7.1
+```
+
+## Tests
+
+Testing on the images is performed with [Google's Container Structure Test](https://github.com/GoogleContainerTools/container-structure-test)
+suite. The tests are located in the `/tests` folder and are separated by what they are testing.
+
+- `image_tests.yaml` is for testing the state of the image and it's metadata.
+- `nginx_tests.yaml` if for testing all things Nginx.
+- `php_tests.yaml` if for testing all things PHP and application settings.
+- `supervisord_tests.yaml` if for testing all things Supervisord.
+
+To run the tests locally, build the image you wish to test and run the tests. Below is a example of testing the PHP 7.3 image.
+
+```bash
+make php73
+container-structure-test test \
+    --image learninghouse/nginx-phpfpm:7.3 \
+    --config tests/image_tests.yaml \
+    --config tests/nginx_tests.yaml \
+    --config tests/php_tests.yaml \
+    --config tests/supervisord_tests.yaml
 ```
