@@ -70,14 +70,10 @@ RUN composer global require hirak/prestissimo && \
 EXPOSE 80
 
 # Setup container runtime
-COPY scripts/entrypoint.sh /sbin/entrypoint.sh
-COPY scripts/optimize_laravel.sh /sbin/optimize_laravel
 COPY configs/supervisord.conf /etc/supervisord.conf
 RUN sed -i "s|{{php_version}}|${PHP_VERSION}|g" /etc/supervisord.conf
 COPY scripts/supervisord-watchdog /sbin/supervisord-watchdog
-RUN chmod 755 /sbin/entrypoint.sh && \
-    chmod 755 /sbin/optimize_laravel && \
-    chmod 755 /sbin/supervisord-watchdog && \
+RUN chmod 755 /sbin/supervisord-watchdog && \
     touch /var/run/supervisord.pid && \
     mkdir -p /var/log/supervisord
-CMD ["/sbin/entrypoint.sh"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
