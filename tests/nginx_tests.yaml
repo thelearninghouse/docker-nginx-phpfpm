@@ -1,0 +1,58 @@
+schemaVersion: "2.0.0"
+
+commandTests:
+
+# check that the nginx binary is in the correct location
+  - name: "nginx installation"
+    command: "which"
+    args: ["nginx"]
+    expectedOutput: ["/usr/sbin/nginx\n"]
+
+fileExistenceTests:
+
+# check that nginx config exists
+  - name: "nginx config exists"
+    path: "/etc/nginx/nginx.conf"
+    shouldExist: true
+
+# check that nginx default site config exists
+  - name: "nginx default site config exists"
+    path: "/etc/nginx/conf.d/default.conf"
+    shouldExist: true
+
+# check that nginx temp location exist
+  - name: "nginx temp location exists"
+    path: "/var/tmp/nginx"
+    permissions: "drwxrwx---"
+    shouldExist: true
+
+# check that nginx file upload location exist
+  - name: "nginx file upload location exists"
+    path: "/var/tmp/nginx/client_body"
+    permissions: "drwxrwx---"
+    shouldExist: true
+
+fileContentTests:
+
+# check that nginx.conf settings are correct
+  - name: "nginx.conf settings"
+    path: "/etc/nginx/nginx.conf"
+    expectedContents:
+      - 'user                    www;'
+      - 'error_log               /dev/stdout warn;'
+      - 'access_log           /dev/stdout main;'
+      - 'client_max_body_size 50M;'
+      - 'sendfile             on;'
+
+# check that default.conf settings are correct
+  - name: "nginx.conf settings"
+    path: "/etc/nginx/conf.d/default.conf"
+    expectedContents:
+      - 'listen 80;'
+      - 'root /app/public;'
+      - 'add_header X-Frame-Options "SAMEORIGIN";'
+      - 'add_header X-XSS-Protection "1; mode=block";'
+      - 'add_header X-Content-Type-Options "nosniff";'
+      - 'try_files \$uri \$uri/ /index.php\?\$query_string;'
+      - 'try_files \$fastcgi_script_name =404;'
+      - 'fastcgi_param PATH_INFO \$fastcgi_path_info if_not_empty;'

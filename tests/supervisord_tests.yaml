@@ -1,0 +1,34 @@
+schemaVersion: "2.0.0"
+
+commandTests:
+
+# check that the supervisord binary is in the correct location
+  - name: "supervisord installation"
+    command: "which"
+    args: ["supervisord"]
+    expectedOutput: ["/usr/bin/supervisord\n"]
+
+fileExistenceTests:
+
+# check that supervisord.conf config exists
+  - name: "nginx config exists"
+    path: "/etc/supervisord.conf"
+    shouldExist: true
+
+# check that supevisord-watchdog script exists
+  - name: "supevisord-watchdog script exists"
+    path: "/sbin/supervisord-watchdog"
+    permissions: "-rwxr-xr-x"
+    shouldExist: true
+
+fileContentTests:
+
+# check that supervisord.conf settings are correct
+  - name: "supervisord.conf settings"
+    path: "/etc/supervisord.conf"
+    expectedContents:
+      - "command=nginx -c /etc/nginx/nginx.conf  -g 'daemon off;'"
+      - "command=php-fpm7 -F -c /etc/php7/php-fpm.conf"
+      - 'command=/bin/sh -c "exec 3<>/var/log/php7/stdout; cat <&3 >/proc/1/fd/1"'
+      - 'command=/bin/sh -c "exec 4<>/var/log/php7/stderr; cat <&4 >/proc/1/fd/2"'
+      - 'command=/sbin/supervisord-watchdog'
