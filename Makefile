@@ -7,8 +7,9 @@ help:
 	@echo "  make php71    Build only the PHP 7.1 image"
 	@echo "  make php72    Build only the PHP 7.2 image"
 	@echo "  make php73    Build only the PHP 7.3 image"
+	@echo "  make php71blackfire   Build only the PHP 7.1.blackfire image"
 
-all: php71 php72 php73
+all: php71 php72 php73 php71blackfire
 
 php71: php71.dockerfile
 	docker build --no-cache -f $< -t $(docker_repo):7.1 .
@@ -18,3 +19,6 @@ php72: php72.dockerfile
 
 php73: php73.dockerfile
 	docker build --no-cache -f $< -t $(docker_repo):7.3 .
+
+php71blackfire: php71blackfire.dockerfile
+	docker build --no-cache -f $< -t $(docker_repo):7.1.blackfire .

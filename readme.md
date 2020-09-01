@@ -18,6 +18,13 @@
 - Nginx 1.14
 - Supervisor 3.3
 
+### PHP 7.1.blackfire (`php71blackfire.dockerfile`)
+
+- Alpine Linux 3.7
+- PHP 7.1
+- Nginx 1.12
+- Supervisor 3.3
+
 ### PHP 7.1 (`php71.dockerfile`)
 
 - Alpine Linux 3.7
