@@ -18,3 +18,6 @@ php72: php72.dockerfile
 
 php73: php73.dockerfile
 	docker build --no-cache -f $< -t $(docker_repo):7.3 .
+
+php80: php80.dockerfile
+	docker build --no-cache -f $< -t $(docker_repo):8.0 .
