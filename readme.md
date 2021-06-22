@@ -4,6 +4,13 @@
 
 ## Versions
 
+### PHP 8.0 (`php80.dockerfile`)
+
+- Alpine Linux 3.14
+- PHP 7.4
+- Nginx 1.20.1
+- Supervisor 4.2.2
+
 ### PHP 7.3 (`php73.dockerfile`)
 
 - Alpine Linux 3.10
@@ -38,6 +45,7 @@ make all
 ## Build specific PHP version
 
 ```bash
+make php80   # PHP 8.0
 make php73   # PHP 7.3
 make php72   # PHP 7.2
 make php71   # PHP 7.1
