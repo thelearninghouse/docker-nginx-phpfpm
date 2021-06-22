@@ -8,7 +8,7 @@ help:
 	@echo "  make php72    Build only the PHP 7.2 image"
 	@echo "  make php73    Build only the PHP 7.3 image"
 
-all: php71 php72 php73
+all: php71 php72 php73 php80
 
 php71: php71.dockerfile
 	docker build --no-cache -f $< -t $(docker_repo):7.1 .
