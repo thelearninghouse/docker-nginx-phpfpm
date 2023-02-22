@@ -1,0 +1,62 @@
+FROM php:8.1.16-fpm-alpine
+
+LABEL Maintainer="Ramon Hernandez <rahernande@wiley.com>"
+
+ENV PHP_VERSION 8
+ENV NGINX_USER www
+ENV NGINX_GROUP www
+
+# Install Nginx, Supervisor
+RUN apk --no-cache add \
+    nginx \
+    supervisor \
+    curl \
+    git
+
+RUN adduser -D -g '${NGINX_GROUP}' ${NGINX_USER} && \
+    mkdir -p /app && \
+    chown -R ${NGINX_USER}:${NGINX_GROUP} /app
+WORKDIR /app
+
+# Configure Nginx
+COPY configs/nginx.conf /etc/nginx/nginx.conf
+COPY configs/nginx.www.conf /etc/nginx/conf.d/default.conf
+
+# Configure PHP-FPM
+RUN touch /var/run/php-fpm.pid && \
+    chown -R www:www /var/run/php-fpm.pid
+COPY configs/php.ini ${PHP_INI_DIR}/php.ini
+COPY configs/php-fpm${PHP_VERSION}.conf /usr/local/etc/php-fpm.conf
+COPY configs/php.www.conf ${PHP_INI_DIR}/php-fpm.d/www.conf
+
+# Configure PHP-FPM logging
+RUN mkdir -p /var/log/php && \
+    chown -R ${NGINX_USER}:${NGINX_GROUP} /var/log/php
+RUN mkfifo -m 666 /var/log/php/stdout && \
+    mkfifo -m 666 /var/log/php/stderr
+
+# Configure file uploads
+RUN mkdir -p /var/tmp/nginx/client_body && \
+    chown -R ${NGINX_USER}:${NGINX_GROUP} /var/tmp/nginx && \
+    chmod 770 /var/tmp/nginx && \
+    chmod -R 770 /var/tmp/nginx/client_body
+
+# Install Composer
+COPY scripts/install_composer.sh /root
+RUN chmod 755 /root/install_composer.sh && \
+    cd /root && \
+    ./install_composer.sh
+ENV PATH="/root/.composer/vendor/bin:${PATH}"
+RUN rm -rf /root/.composer/cache
+
+# Available Ports
+EXPOSE 80
+
+# Setup container runtime
+COPY configs/supervisord${PHP_VERSION}.conf /etc/supervisord.conf
+RUN sed -i "s|{{php_version}}|${PHP_VERSION}|g" /etc/supervisord.conf
+COPY scripts/supervisord-watchdog /sbin/supervisord-watchdog
+RUN chmod 755 /sbin/supervisord-watchdog && \
+    touch /var/run/supervisord.pid && \
+    mkdir -p /var/log/supervisord
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
