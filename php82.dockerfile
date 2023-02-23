@@ -1,10 +1,10 @@
-FROM php:8.1.16-fpm-alpine
+FROM php:8.2.3-fpm-alpine
 LABEL Maintainer="Ray Hernandez <rahernande@wiley.com>"
 
 ENV PHP_VERSION 8
 ENV PHP_CONFIG_DIR /etc/php8
 
-# Install Nginx, PHP-FPM, and Supervisor
+# Install Nginx, PHP-FPM, Supervisor, and PHP support libs
 RUN apk --no-cache add \
     libmcrypt-dev \
     libzip-dev \
@@ -16,7 +16,7 @@ RUN apk --no-cache add \
     git
 
 # add missing extensions
-RUN pecl install mcrypt && docker-php-ext-enable mcrypt
+#RUN pecl install mcrypt && docker-php-ext-enable mcrypt
 RUN docker-php-ext-install pdo_mysql && \
     docker-php-ext-install zip
 
