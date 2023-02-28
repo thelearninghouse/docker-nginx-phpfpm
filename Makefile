@@ -1,4 +1,4 @@
-docker_repo = wiley/nginx-phpfpm
+docker_repo = learninghouse/nginx-phpfpm
 
 help:
 	@echo "Build PHP Docker base images."
