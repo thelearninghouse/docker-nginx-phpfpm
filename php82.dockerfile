@@ -50,7 +50,6 @@ RUN touch /var/run/php-fpm.pid && \
     chown -R www:www /var/run/php-fpm.pid
 COPY configs/php.ini ${PHP_CONFIG_DIR}/php.ini
 COPY configs/php-fpm.conf ${PHP_CONFIG_DIR}/php-fpm.conf
-COPY configs/opcache.ini ${PHP_CONFIG_DIR}/opcache.ini
 RUN sed -i "s|{{php_version}}|${PHP_VERSION}|g" ${PHP_CONFIG_DIR}/php-fpm.conf
 COPY configs/php.www.conf ${PHP_CONFIG_DIR}/php-fpm.d/www.conf
 
