@@ -18,3 +18,6 @@ php72: php72.dockerfile
 
 php73: php73.dockerfile
 	docker build --no-cache -f $< -t $(docker_repo):7.3 .
+
+php82: php82.dockerfile
+	docker build --no-cache -f $< -t 934902905286.dkr.ecr.us-east-1.amazonaws.com/nginx-phpfpm:8.2 .
