@@ -1,4 +1,4 @@
-FROM php:8.2.3-fpm-alpine
+FROM php:8.2.7-fpm-alpine
 LABEL Maintainer="Ray Hernandez <rahernande@wiley.com>"
 
 ENV PHP_VERSION 8
